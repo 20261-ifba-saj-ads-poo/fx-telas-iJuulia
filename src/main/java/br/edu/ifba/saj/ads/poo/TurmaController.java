@@ -1,16 +1,13 @@
 package br.edu.ifba.saj.ads.poo;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-import java.util.Objects;
+import java.io.IOException;
 
-import br.edu.ifba.saj.ads.poo.data.Cinema;
-import br.edu.ifba.saj.ads.poo.model.Filme;
+import br.edu.ifba.saj.ads.poo.data.Escola;
+import br.edu.ifba.saj.ads.poo.model.Professor;
+import br.edu.ifba.saj.ads.poo.model.Turma;
 import javafx.collections.FXCollections;
-import javafx.scene.layout.AnchorPane;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ChoiceBox;
@@ -18,6 +15,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 
 public class TurmaController {
 
@@ -25,13 +23,13 @@ public class TurmaController {
     private ChoiceBox<Professor> cbProfessor;
 
     @FXML
-    private TableColumn<Aluno, String> clmAlunos;
+    private TableColumn<Turma, String> clmAlunos;
 
     @FXML
     private TableColumn<Turma, String> clmNome;
 
     @FXML
-    private TableColumn<Professor, String> clmProfessor;
+    private TableColumn<Turma, String> clmProfessor;
 
     @FXML
     private TableView<Turma> tbTurmas;
@@ -47,10 +45,10 @@ public class TurmaController {
 	@FXML
 	private void initialize() {
 		clmNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        clmProfessor.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        clmAlunos.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        clmProfessor.setCellValueFactory(new PropertyValueFactory<>("nomeProfessores"));
+        clmAlunos.setCellValueFactory(new PropertyValueFactory<>("nomeAlunos"));
 
-		cbProfessor.getItems().addAll(Escola.turmas);
+		cbProfessor.getItems().addAll(Escola.professores);
         cbProfessor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 professorSelecionado = newValue;
@@ -64,29 +62,32 @@ public class TurmaController {
 
     @FXML
     void salvar(ActionEvent event) {
-		 if ((Objects.nonNull(txNome.getText())
-                && !txNome.getText().isEmpty())
-                &&
-                (Objects.nonNull(cbProfessor.getSelectionModel().getSelectedItem())
-                        && !txNome.getText().isEmpty()
-                        && !txNome.getText().isEmpty())) {
+		 if (!txNome.getText().isBlank() && cbProfessor.getValue() != null) {
             Turma novaTurma = new Turma(txNome.getText());
+            novaTurma.addProfessor(professorSelecionado);
             Escola.turmas.add(novaTurma);
-            new Alert(AlertType.INFORMATION, String.format("Nova turma %s cadastrada", novaTurma.getNome()))
+            new Alert(AlertType.INFORMATION, String.format("Turma de %s cadastrada", novaTurma.getNome()))
                     .showAndWait();
 		}
+        loadTurmasList();
     }
 
     @FXML
     void goToCadProfessores(ActionEvent event) {
-		System.out.println("Indo para cadastro de professores");
+		try {
+            App.setRoot("Professores");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 	@FXML
     void goToCadAlunos(ActionEvent event) {
-		System.out.println("Indo para cadastro de alunos");
-		pane.
-
+		try {
+            App.setRoot("Aluno");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
