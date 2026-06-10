@@ -59,4 +59,9 @@ public class Turma {
             .reduce((a, b) -> a + ", " + b)
             .orElse("");
 	}
+
+	@Override
+	public String toString() {
+		return nome;
+	}
 }

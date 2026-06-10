@@ -44,4 +44,9 @@ public class Professor {
 
 		return lista;
 	}
+
+	@Override
+	public String toString() {
+		return nome;
+	}
 }

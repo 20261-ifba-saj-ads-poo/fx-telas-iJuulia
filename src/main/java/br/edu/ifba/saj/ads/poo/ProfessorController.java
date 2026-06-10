@@ -3,7 +3,7 @@ package br.edu.ifba.saj.ads.poo;
 import java.io.IOException;
 
 import br.edu.ifba.saj.ads.poo.data.Escola;
-import br.edu.ifba.saj.ads.poo.model.Aluno;
+import br.edu.ifba.saj.ads.poo.model.Professor;
 import br.edu.ifba.saj.ads.poo.model.Turma;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,19 +12,19 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
-public class AlunoController {
+public class ProfessorController {
     @FXML
     private TextField txNome;
 
     @FXML
-    private ChoiceBox<Turma> cbTurmas;
+    private ChoiceBox<Turma> cbTurma;
 
     private Turma turmaSelecionada;
 
     @FXML
     private void initialize() {
-		cbTurmas.getItems().addAll(Escola.turmas);
-        cbTurmas.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+		cbTurma.getItems().addAll(Escola.turmas);
+        cbTurma.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 turmaSelecionada = newValue;
             }
@@ -32,9 +32,9 @@ public class AlunoController {
 	}
 
     @FXML
-    void goToCadProfessores(ActionEvent event) {
+    void goToCadAlunos(ActionEvent event) {
         try {
-            App.setRoot("Professor");
+            App.setRoot("Aluno");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,14 +52,14 @@ public class AlunoController {
 
     @FXML
     void salvar(ActionEvent event) {
-		if (!txNome.getText().isBlank()) {
-            Aluno novoAluno = new Aluno(txNome.getText());
-            Escola.alunos.add(novoAluno);
-            if (cbTurmas.getValue() != null) {
-                novoAluno.addTurma(turmaSelecionada);
+        if (!txNome.getText().isBlank()) {
+            Professor novoProfessor = new Professor(txNome.getText());
+            Escola.professores.add(novoProfessor);
+            if (cbTurma.getValue() != null) {
+                novoProfessor.addTurma(turmaSelecionada);
             }
-            new Alert(AlertType.INFORMATION, String.format("Aluno %s cadastrado", novoAluno.getNome()))
+            new Alert(AlertType.INFORMATION, String.format("Professor %s cadastrado", novoProfessor.getNome()))
                     .showAndWait();
-        }
+		}
     }
 }
