@@ -10,31 +10,32 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 public class TurmaController {
 
     @FXML
-    private ChoiceBox<Professor> cbProfessor;
+    private ListView<Professor> cbProfessor;
 
-    @FXML
-    private ChoiceBox<Aluno> cbAlunos;
+    //@FXML
+    //private ChoiceBox<Aluno> cbAlunos;
 
     @FXML
     private TextField txNome;
 
-	private Professor professorSelecionado;
+	//private Professor professorSelecionado;
 	// private Professor alunosSelecionado;
 
 	@FXML
 	private void initialize() {
 		cbProfessor.getItems().addAll(Escola.professores);
-        cbProfessor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                professorSelecionado = newValue;
-            }
-		});
+        //cbProfessor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        //    if (newValue != null) {
+        //        professorSelecionado = newValue;
+        //    }
+		//});
+        cbProfessor.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
 
 		// cbAlunos.getItems().addAll(Escola.alunos);
         // cbAlunos.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -49,10 +50,12 @@ public class TurmaController {
 		if (!txNome.getText().isBlank()) {
             Turma novaTurma = new Turma(txNome.getText());
             Escola.turmas.add(novaTurma);
-            if (cbProfessor.getValue() != null) {
-                novaTurma.addProfessor(professorSelecionado);
+            if (cbProfessor.getSelectionModel() != null && !cbProfessor.getSelectionModel().getSelectedItems().isEmpty()) {
+                for (Professor p : cbProfessor.getSelectionModel().getSelectedItems()) {
+                    novaTurma.addProfessor(p);
+                }                
             }
-            new Alert(AlertType.INFORMATION, String.format("Turma de %s cadastrada", novaTurma.getNome()))
+            new Alert(AlertType.INFORMATION, String.format("Turma de %s cadastrada com professores %s", novaTurma.getNome(), novaTurma.getNomeProfessores()))
                     .showAndWait();
 		}
     }

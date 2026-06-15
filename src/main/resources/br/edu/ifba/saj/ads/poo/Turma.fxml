@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -17,9 +17,9 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="cbProfessor" layoutX="111.0" layoutY="120.0" prefHeight="26.0" prefWidth="355.0" />
       <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="-15.0" layoutY="83.0" prefHeight="18.0" prefWidth="110.0" text="Nome:" />
       <Button layoutX="15.0" layoutY="220.0" mnemonicParsing="false" onAction="#goToCadProfessores" text="Cadastro de Professores" />
       <Button layoutX="197.0" layoutY="220.0" mnemonicParsing="false" onAction="#goToCadAlunos" text="Cadastro de Alunos" />
+      <ListView fx:id="cbProfessor" layoutX="112.0" layoutY="121.0" prefHeight="64.0" prefWidth="355.0" />
    </children>
 </AnchorPane>
