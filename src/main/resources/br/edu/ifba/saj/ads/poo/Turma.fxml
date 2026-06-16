@@ -7,19 +7,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="190.0" prefHeight="266.0" prefWidth="511.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifba.saj.ads.poo.TurmaController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="190.0" prefHeight="335.0" prefWidth="557.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifba.saj.ads.poo.TurmaController">
    <children>
-      <TextField fx:id="txNome" layoutX="112.0" layoutY="81.0" prefHeight="26.0" prefWidth="355.0" />
-      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="-15.0" layoutY="124.0" prefHeight="18.0" prefWidth="110.0" text="Professor:" AnchorPane.leftAnchor="-15.0" AnchorPane.topAnchor="124.0" />
-      <Button defaultButton="true" layoutX="529.0" layoutY="220.0" mnemonicParsing="false" onAction="#salvar" text="Salvar" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="220.0" />
+      <TextField fx:id="txNome" layoutX="152.0" layoutY="81.0" prefHeight="26.0" prefWidth="355.0" />
+      <Button defaultButton="true" layoutX="529.0" layoutY="220.0" mnemonicParsing="false" onAction="#salvar" text="Salvar" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" />
+      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="25.0" layoutY="122.0" prefHeight="18.0" prefWidth="110.0" text="Professor(es):" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="122.0" />
       <Label alignment="CENTER" layoutY="28.0" text="Cadastro de Turma" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="-15.0" layoutY="83.0" prefHeight="18.0" prefWidth="110.0" text="Nome:" />
-      <Button layoutX="15.0" layoutY="220.0" mnemonicParsing="false" onAction="#goToCadProfessores" text="Cadastro de Professores" />
-      <Button layoutX="197.0" layoutY="220.0" mnemonicParsing="false" onAction="#goToCadAlunos" text="Cadastro de Alunos" />
-      <ListView fx:id="cbProfessor" layoutX="112.0" layoutY="121.0" prefHeight="64.0" prefWidth="355.0" />
+      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="25.0" layoutY="83.0" prefHeight="18.0" prefWidth="110.0" text="Nome:" />
+      <Button layoutX="15.0" layoutY="220.0" mnemonicParsing="false" onAction="#goToCadProfessores" text="Cadastro de Professores" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="15.0" />
+      <Button layoutX="197.0" layoutY="220.0" mnemonicParsing="false" onAction="#goToCadAlunos" text="Cadastro de Alunos" AnchorPane.bottomAnchor="10.0" />
+      <ListView fx:id="lvProfessor" layoutX="152.0" layoutY="119.0" prefHeight="64.0" prefWidth="355.0" />
+      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="25.0" layoutY="198.0" prefHeight="18.0" prefWidth="110.0" text="Alunos:" />
+      <ListView fx:id="lvAlunos" layoutX="152.0" layoutY="195.0" prefHeight="64.0" prefWidth="355.0" />
    </children>
 </AnchorPane>

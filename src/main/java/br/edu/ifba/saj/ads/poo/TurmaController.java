@@ -16,33 +16,20 @@ import javafx.scene.control.TextField;
 public class TurmaController {
 
     @FXML
-    private ListView<Professor> cbProfessor;
+    private ListView<Professor> lvProfessor;
 
-    //@FXML
-    //private ChoiceBox<Aluno> cbAlunos;
+    @FXML
+    private ListView<Aluno> lvAlunos;
 
     @FXML
     private TextField txNome;
 
-	//private Professor professorSelecionado;
-	// private Professor alunosSelecionado;
-
 	@FXML
 	private void initialize() {
-		cbProfessor.getItems().addAll(Escola.professores);
-        //cbProfessor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-        //    if (newValue != null) {
-        //        professorSelecionado = newValue;
-        //    }
-		//});
-        cbProfessor.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
-
-		// cbAlunos.getItems().addAll(Escola.alunos);
-        // cbAlunos.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-        //     if (newValue != null) {
-        //         professorSelecionado = newValue;
-        //     }
-		// });
+		lvProfessor.getItems().addAll(Escola.professores);
+        lvProfessor.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
+        lvAlunos.getItems().addAll(Escola.alunos);
+        lvAlunos.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
 	}
 
     @FXML
@@ -50,9 +37,15 @@ public class TurmaController {
 		if (!txNome.getText().isBlank()) {
             Turma novaTurma = new Turma(txNome.getText());
             Escola.turmas.add(novaTurma);
-            if (cbProfessor.getSelectionModel() != null && !cbProfessor.getSelectionModel().getSelectedItems().isEmpty()) {
-                for (Professor p : cbProfessor.getSelectionModel().getSelectedItems()) {
+            if (lvProfessor.getSelectionModel() != null && !lvProfessor.getSelectionModel().getSelectedItems().isEmpty()) {
+                for (Professor p : lvProfessor.getSelectionModel().getSelectedItems()) {
                     novaTurma.addProfessor(p);
+                }                
+            }
+
+            if (lvAlunos.getSelectionModel() != null && !lvAlunos.getSelectionModel().getSelectedItems().isEmpty()) {
+                for (Aluno a : lvAlunos.getSelectionModel().getSelectedItems()) {
+                    novaTurma.addAluno(a);
                 }                
             }
             new Alert(AlertType.INFORMATION, String.format("Turma de %s cadastrada com professores %s", novaTurma.getNome(), novaTurma.getNomeProfessores()))
